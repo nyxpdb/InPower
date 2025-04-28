@@ -1,7 +1,14 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-function ConfirmModal({ show, onHide, onConfirm, title, body }) {
+function ConfirmModal({ show, onHide, onConfirm, title, body }) 
+  {
+  const handleConfirm = () => 
+  {
+    onConfirm();
+    onHide(); 
+  };
+
   return (
     <Modal
       show={show}
@@ -18,7 +25,7 @@ function ConfirmModal({ show, onHide, onConfirm, title, body }) {
         <Button variant="dark" onClick={onHide}>
           Cancelar
         </Button>
-        <Button variant="danger" onClick={onConfirm}>
+        <Button variant="danger" onClick={handleConfirm}>
           Confirmar
         </Button>
       </Modal.Footer>
