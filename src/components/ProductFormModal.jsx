@@ -44,6 +44,7 @@ const ProductFormModal = ({ show, onHide, onSave, product }) => {
 
   const handleSubmit = () => {
     onSave(formData);
+    onHide();
     setMessage({ text: "Produto salvo com sucesso!", type: "success" });
     setTimeout(() => setMessage({ text: "", type: "" }), 3000);  
   };
