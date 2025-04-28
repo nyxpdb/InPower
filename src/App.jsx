@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
 import { Container, Row, Button, Spinner, Alert } from "react-bootstrap";
+import Home from "./pages/Home"; // vamos criar esse arquivo já já
 import ProductList from "./components/ProductList";
 import ProductModal from "./components/ProductModal";
 import ProductFormModal from "./components/ProductFormModal";
-import ConfirmModal from "./components/ConfirmModal"; 
+import ConfirmModal from "./components/ConfirmModal";
 import { getProducts, saveProduct, deleteProduct, updateProduct } from "./services/productService";
 
-function App() {
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [editingProduct, setEditingProduct] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [notification, setNotification] = useState(null);
-  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+function ProductCatalog() {
+  const navigate = useNavigate();
+  const [products, setProducts] = React.useState([]);
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
+  const [editingProduct, setEditingProduct] = React.useState(null);
+  const [showForm, setShowForm] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [notification, setNotification] = React.useState(null);
+  const [confirmDeleteId, setConfirmDeleteId] = React.useState(null);
 
   const fetchProducts = async () => {
     try {
@@ -29,7 +32,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setLoading(true);
     fetchProducts().then(() => setLoading(false));
   }, []);
@@ -90,9 +93,14 @@ function App() {
     <div>
       <div className="bg-dark text-white py-3 d-flex justify-content-between align-items-center px-4">
         <h1 className="m-0 fs-4">InPower Catalog</h1>
-        <Button variant="light" onClick={() => setShowForm(true)}>
-          {loading ? <Spinner size="sm" animation="border" /> : "Cadastrar Produto"}
-        </Button>
+        <div className="d-flex gap-2">
+          <Button variant="light" onClick={() => navigate("/sobre")}>
+            Sobre nós
+          </Button>
+          <Button variant="light" onClick={() => setShowForm(true)}>
+            {loading ? <Spinner size="sm" animation="border" /> : "Cadastrar Produto"}
+          </Button>
+        </div>
       </div>
 
       <Container className="py-4">
@@ -147,4 +155,16 @@ function App() {
   );
 }
 
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<ProductCatalog />} />
+        <Route path="/sobre" element={<Home />} />
+      </Routes>
+    </Router>
+  );
+}
+
 export default App;
+  

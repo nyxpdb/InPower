@@ -1,33 +1,112 @@
+/* Estilo geral do corpo */
 body {
-    background-color: #f8f9fa; 
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif; 
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Container padrão */
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Ajustes para dispositivos menores */
+@media (max-width: 576px) {
+  .modal-content {
+    margin: 1rem;
   }
-  
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+
+  .alert {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
   }
-  
-  @media (max-width: 576px) {
-    .modal-content {
-      margin: 1rem;
-    }
-  
-    .alert {
-      font-size: 0.9rem;
-      padding: 0.75rem 1rem;
-    }
-  
-    .btn {
-      font-size: 1rem;
-      padding: 0.6rem 1rem;
-    }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
   }
-  
-  .spinner-border {
-    width: 3rem;
-    height: 3rem;
-  }
-  
+}
+
+/* Spinner maior para carregamento */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Estilos da Navbar */
+.navbar-custom {
+  background-color: #212529;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-custom h1 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Botões na Navbar */
+.navbar-custom .btn {
+  margin-left: 0.5rem;
+}
+
+/* Card de boas-vindas */
+.welcome-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Página Sobre Nós */
+.about-page {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.about-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.about-page .lead {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #6c757d;
+}
+
+.about-page h2 {
+  font-size: 2rem;
+  color: #343a40;
+  margin-top: 2rem;
+}
+
+/* Imagens das tecnologias */
+.tech-logos img {
+  width: 80px;
+  height: auto; 
+  max-width: 100%;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+
+.tech-logos img:hover {
+  transform: scale(1.1);
+}
+
+/* Botão voltar */
+.about-page .btn-primary {
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+}
