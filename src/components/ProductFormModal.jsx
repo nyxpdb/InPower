@@ -19,16 +19,11 @@ const ProductFormModal = ({ show, onHide, onSave, product }) => {
     else setFormData(initialForm);
   }, [product]);
 
-  const formatPrice = (value) => 
-  {
-
+  const formatPrice = (value) => {
     value = value.replace(/\D/g, "");
-
     value = (Number(value) / 100).toFixed(2);
-
     value = value.replace(".", ",");
     value = `R$ ${value}`;
-
     return value;
   };
 
@@ -42,17 +37,37 @@ const ProductFormModal = ({ show, onHide, onSave, product }) => {
     }
   };
 
+  const validateForm = () => {
+    if (
+      !formData.name ||
+      !formData.brand ||
+      !formData.price ||
+      !formData.image ||
+      !formData.description
+    ) {
+      setMessage({
+        text: "Todos os campos são obrigatórios.",
+        type: "danger"
+      });
+      setTimeout(() => setMessage({ text: "", type: "" }), 3000);
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = () => {
+    if (!validateForm()) return;
+
     onSave(formData);
     onHide();
     setMessage({ text: "Produto salvo com sucesso!", type: "success" });
-    setTimeout(() => setMessage({ text: "", type: "" }), 3000);  
+    setTimeout(() => setMessage({ text: "", type: "" }), 3000);
   };
 
   const handleCancel = () => {
     onHide();
     setMessage({ text: "Ação cancelada.", type: "warning" });
-    setTimeout(() => setMessage({ text: "", type: "" }), 3000);  
+    setTimeout(() => setMessage({ text: "", type: "" }), 3000);
   };
 
   return (
@@ -69,11 +84,19 @@ const ProductFormModal = ({ show, onHide, onSave, product }) => {
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Nome</Form.Label>
-            <Form.Control name="name" value={formData.name} onChange={handleChange} />
+            <Form.Control
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Marca</Form.Label>
-            <Form.Control name="brand" value={formData.brand} onChange={handleChange} />
+            <Form.Control
+              name="brand"
+              value={formData.brand}
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Preço</Form.Label>
@@ -86,17 +109,30 @@ const ProductFormModal = ({ show, onHide, onSave, product }) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Imagem</Form.Label>
-            <Form.Control name="image" value={formData.image} onChange={handleChange} />
+            <Form.Control
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Descrição</Form.Label>
-            <Form.Control as="textarea" name="description" value={formData.description} onChange={handleChange} />
+            <Form.Control
+              as="textarea"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="dark" onClick={handleCancel}>Cancelar</Button>
-        <Button variant="dark" onClick={handleSubmit}>Salvar</Button>
+        <Button variant="dark" onClick={handleCancel}>
+          Cancelar
+        </Button>
+        <Button variant="dark" onClick={handleSubmit}>
+          Salvar
+        </Button>
       </Modal.Footer>
     </Modal>
   );
